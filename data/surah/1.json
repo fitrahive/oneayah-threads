@@ -8,15 +8,14 @@
     "manzil": 1,
     "arabic": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
     "kitabah": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ",
-    "latin": "Bismillāhir-raḥmānir-raḥīm(i). ",
+    "latin": "Bismillāhir-raḥmānir-raḥīm(i).",
     "arabic_words": [
       "بِسْمِ",
       "اللّٰهِ",
       "الرَّحْمٰنِ",
       "الرَّحِيْمِ"
     ],
-    "translation": "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang.",
-    "footnotes": null
+    "translation": "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang."
   },
   {
     "id": 2,
@@ -27,7 +26,7 @@
     "manzil": 1,
     "arabic": "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ",
     "kitabah": "اَلْحَمْدُ لِلّٰهِ رَبِّ الْعٰلَمِيْنَۙ",
-    "latin": "Al-ḥamdu lillāhi rabbil-‘ālamīn(a). ",
+    "latin": "Al-ḥamdu lillāhi rabbil-‘ālamīn(a).",
     "arabic_words": [
       "اَلْحَمْدُ",
       "لِلّٰهِ",
@@ -35,7 +34,7 @@
       "الْعٰلَمِيْنَۙ"
     ],
     "translation": "Segala puji bagi Allah, Tuhan (1) semesta alam",
-    "footnotes": "1) Allah Swt. disebut rabb (Tuhan) seluruh alam karena Dialah yang telah menciptakan, memelihara, mendidik, mengatur, mengurus, memberi rezeki, dan sebagainya kepada semua makhluk-Nya. "
+    "footnotes": "1) Allah Swt. disebut rabb (Tuhan) seluruh alam karena Dialah yang telah menciptakan, memelihara, mendidik, mengatur, mengurus, memberi rezeki, dan sebagainya kepada semua makhluk-Nya."
   },
   {
     "id": 3,
@@ -46,13 +45,12 @@
     "manzil": 1,
     "arabic": "الرَّحْمٰنِ الرَّحِيْمِۙ",
     "kitabah": "الرَّحْمٰنِ الرَّحِيْمِۙ",
-    "latin": "Ar-raḥmānir-raḥīm(i). ",
+    "latin": "Ar-raḥmānir-raḥīm(i).",
     "arabic_words": [
       "الرَّحْمٰنِ",
       "الرَّحِيْمِۙ"
     ],
-    "translation": "Yang Maha Pengasih lagi Maha Penyayang,",
-    "footnotes": null
+    "translation": "Yang Maha Pengasih lagi Maha Penyayang,"
   },
   {
     "id": 4,
@@ -63,7 +61,7 @@
     "manzil": 1,
     "arabic": "مٰلِكِ يَوْمِ الدِّيْنِۗ",
     "kitabah": "مٰلِكِ يَوْمِ الدِّيْنِۗ",
-    "latin": "Māliki yaumid-dīn(i). ",
+    "latin": "Māliki yaumid-dīn(i).",
     "arabic_words": [
       "مٰلِكِ",
       "يَوْمِ",
@@ -81,15 +79,14 @@
     "manzil": 1,
     "arabic": "اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُۗ",
     "kitabah": "اِيَّاكَ نَعْبُدُ وَاِيَّاكَ نَسْتَعِيْنُۗ",
-    "latin": "Iyyāka na‘budu wa iyyāka nasta‘īn(u), ",
+    "latin": "Iyyāka na‘budu wa iyyāka nasta‘īn(u),",
     "arabic_words": [
       "اِيَّاكَ",
       "نَعْبُدُ",
       "وَاِيَّاكَ",
       "نَسْتَعِيْنُۗ"
     ],
-    "translation": "Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami memohon pertolongan.",
-    "footnotes": null
+    "translation": "Hanya kepada Engkaulah kami menyembah dan hanya kepada Engkaulah kami memohon pertolongan."
   },
   {
     "id": 6,
@@ -100,7 +97,7 @@
     "manzil": 1,
     "arabic": "اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَۙ",
     "kitabah": "اِهْدِنَا الصِّرَاطَ الْمُسْتَقِيْمَۙ",
-    "latin": "Ihdinaṣ-ṣirāṭal-mustaqīm(a). ",
+    "latin": "Ihdinaṣ-ṣirāṭal-mustaqīm(a).",
     "arabic_words": [
       "اِهْدِنَا",
       "الصِّرَاطَ",
@@ -118,7 +115,7 @@
     "manzil": 1,
     "arabic": "صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ ەۙ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ ࣖ",
     "kitabah": "صِرَاطَ الَّذِيْنَ اَنْعَمْتَ عَلَيْهِمْ ەۙ غَيْرِ الْمَغْضُوْبِ عَلَيْهِمْ وَلَا الضَّاۤلِّيْنَ ࣖ",
-    "latin": "Ṣirāṭal-lażīna an‘amta ‘alaihim, gairil-magḍūbi ‘alaihim wa laḍ-ḍāllīn(a). ",
+    "latin": "Ṣirāṭal-lażīna an‘amta ‘alaihim, gairil-magḍūbi ‘alaihim wa laḍ-ḍāllīn(a).",
     "arabic_words": [
       "صِرَاطَ",
       "الَّذِيْنَ",
@@ -131,7 +128,6 @@
       "وَلَا",
       "الضَّاۤلِّيْنَ ࣖ"
     ],
-    "translation": "(yaitu) jalan orang-orang yang telah Engkau beri nikmat, bukan (jalan) mereka yang dimurkai dan bukan (pula jalan) orang-orang yang sesat.",
-    "footnotes": null
+    "translation": "(yaitu) jalan orang-orang yang telah Engkau beri nikmat, bukan (jalan) mereka yang dimurkai dan bukan (pula jalan) orang-orang yang sesat."
   }
 ]

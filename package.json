@@ -9,22 +9,8 @@
     "start": "bun src/threads.ts",
     "collect:surah": "cp -r modules/quran-kemenag/data/* data/surah",
     "collect:tafsir": "cp -r modules/tafsir/data/* data/tafsir",
-    "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "commit": "git-cz"
-  },
-  "eslintConfig": {
-    "extends": [
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "prettier/prettier": [
-        "error"
-      ]
-    }
   },
   "prettier": {
     "trailingComma": "es5",
@@ -43,7 +29,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn format && yarn lint --fix && git add --all",
+      "pre-commit": "bun format && git add --all",
       "prepare-commit-msg": "exec < /dev/tty && npx cz --hook || true"
     }
   },
@@ -51,9 +37,6 @@
     "bun-types": "^0.6.0",
     "commitizen": "^4.3.0",
     "cz-conventional-changelog": "^3.3.0",
-    "eslint": "^8.45.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^5.0.0",
     "husky": "^8.0.3",
     "prettier": "^3.0.0"
   },
@@ -61,6 +44,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "threads-api": "^1.4.3"
+    "axios": "^1.4.0",
+    "dotenv": "^16.3.1",
+    "mrmime": "^1.0.1",
+    "uuid": "^9.0.0"
   }
 }

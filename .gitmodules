@@ -5,3 +5,7 @@
 [submodule "modules/quran-kemenag"]
 	path = modules/quran-kemenag
 	url = git@github.com:fitrahive/quran-kemenag.git
+
+[submodule "modules/threads-api"]
+	path = modules/threads-api
+	url = git@github.com:junhoyeo/threads-api.git

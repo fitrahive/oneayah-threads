@@ -1,5 +1,8 @@
 node_modules/
 
+data/token.json
+data/published.json
+
 *.log
 .env
 .env.*
