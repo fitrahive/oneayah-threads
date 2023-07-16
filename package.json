@@ -7,6 +7,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "bun src/threads.ts",
+    "collect:surah": "cp -r modules/quran-kemenag/data/* data/surah",
     "collect:tafsir": "cp -r modules/tafsir/data/* data/tafsir",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",

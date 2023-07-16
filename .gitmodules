@@ -1,3 +1,7 @@
 [submodule "modules/tafsir"]
 	path = modules/tafsir
 	url = git@github.com:fitrahive/tafsir.git
+
+[submodule "modules/quran-kemenag"]
+	path = modules/quran-kemenag
+	url = git@github.com:fitrahive/quran-kemenag.git
