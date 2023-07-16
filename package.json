@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "husky install",
     "start": "bun src/threads.ts",
-    "collect:tafsir": "cp -r submodule/tafsir/data/* data/tafsir",
+    "collect:tafsir": "cp -r modules/tafsir/data/* data/tafsir",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "commit": "git-cz"
