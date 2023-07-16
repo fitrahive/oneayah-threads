@@ -1,0 +1,3 @@
+[submodule "submodule/tafsir"]
+	path = submodule/tafsir
+	url = git@github.com:fitrahive/tafsir-collector.git
