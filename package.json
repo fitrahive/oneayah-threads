@@ -44,6 +44,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@poppinss/cliui": "^3.0.5",
     "axios": "^1.4.0",
     "dotenv": "^16.3.1",
     "mrmime": "^1.0.1",

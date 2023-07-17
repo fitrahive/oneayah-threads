@@ -2,7 +2,7 @@ import crypto from 'crypto'
 import * as path from 'path'
 import * as fs from 'fs/promises'
 
-type RandomType = {
+export type RandomType = {
   surah: {
     id: number
     arabic: string
