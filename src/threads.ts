@@ -11,7 +11,6 @@ if (await fs.exists(tokenPath)) {
 }
 
 const threads = new Threads.ThreadsAPI({
-  verbose: true,
   token: token || undefined,
   username: process.env.THREADS_USERNAME,
   password: process.env.THREADS_PASSWORD,
@@ -30,7 +29,7 @@ async function publish() {
 
   parentId = await threads.publish({ text })
 
-  if (text.length <= 500 || !parentId) {
+  if (text.length > 500 || !parentId) {
     publish()
     return
   }
@@ -69,7 +68,7 @@ async function publish() {
     }
   }
 
-  console.log('Done.')
+  console.log(`Published: QS. ${current.surah.transliteration}: ${current.ayah.ayah}`)
 }
 
 publish()
