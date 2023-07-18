@@ -9,6 +9,7 @@ let token: string = ''
 
 const deviceId = `android-${(Math.random() * 1e24).toString(36)}`
 const tokenPath = path.resolve(import.meta.dir, '..', 'data/token.json')
+const delay = () => new Promise((resolve) => setTimeout(resolve, 10_000))
 
 if (await fs.exists(tokenPath)) {
   token = await Bun.file(tokenPath).json()
@@ -17,8 +18,8 @@ if (await fs.exists(tokenPath)) {
 const threads = new Threads.ThreadsAPI({
   deviceID: deviceId,
   token: token || undefined,
-  username: process.env.THREADS_USERNAME,
-  password: process.env.THREADS_PASSWORD,
+  username: Bun.env.THREADS_USERNAME,
+  password: Bun.env.THREADS_PASSWORD,
 })
 token = (await threads.getToken()) || ''
 
@@ -45,6 +46,11 @@ async function publish(first: boolean = true) {
       spinner.stop()
       logger.success(`Retrieved a random ayah: ${qs}`)
 
+      if (text.length > 500) {
+        publish(true)
+        await task.fail(`Generated text exceeds 500 characters`)
+      }
+
       spinner = logger.await(`Currently posting a random ayah`)
 
       try {
@@ -52,46 +58,31 @@ async function publish(first: boolean = true) {
       } catch (error: any) {
         spinner.stop()
         await task.fail(error.message)
-
-        return
       }
 
       spinner.stop()
-
-      if (text.length > 500 || !threadsId) {
-        publish(true)
-        await task.fail(`Failed to post ${qs}`)
-      }
-
       logger.success(`Successfully posted ${qs}`)
+
       await task.complete()
     })
     .add('Posting footnotes if available', async (logger, task) => {
-      if (!current.ayah.footnotes) {
+      const text = `Catatan Kaki:\n\n${current.ayah.footnotes}`
+
+      if (text.length > 500 || !current.ayah.footnotes) {
         await task.complete('No footnotes available')
-        return
       }
 
       spinner = logger.await(`Currently posting a footnotes`)
 
       try {
-        childrenId = await threads.publish({
-          text: `Catatan Kaki:\n\n${current.ayah.footnotes}`,
-          parentPostID: parentId!.split('_')[0],
-        })
+        await delay()
+        childrenId = await threads.publish({ text, parentPostID: parentId!.split('_')[0] })
       } catch (error: any) {
         spinner.stop()
         await task.fail(error.message)
-
-        return
       }
 
       spinner.stop()
-
-      if (!childrenId) {
-        logger.error('Failed to post footnotes')
-      }
-
       logger.success('Successfully posted footnotes')
       parentId = childrenId || parentId
 
@@ -110,27 +101,21 @@ async function publish(first: boolean = true) {
       if (items.length > 0) {
         for (const index in items) {
           spinner = logger.await(`Currently posting a tafsir #${index + 1}`)
-
           const tafsir = items[index]
 
           try {
+            await delay()
             childrenId = await threads.publish({
               text: `${tafsir.title}\n\n${tafsir.description}`,
               parentPostID: parentId!.split('_')[0],
             })
           } catch (error: any) {
             spinner.stop()
-            await task.fail(error.message)
-
-            return
+            logger.error(error.message)
+            continue
           }
 
           spinner.stop()
-
-          if (!childrenId) {
-            logger.error(`Failed to post tafsir #${index + 1}`)
-          }
-
           parentId = childrenId || parentId
         }
       }
