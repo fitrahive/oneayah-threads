@@ -9,7 +9,7 @@ let token: string = ''
 
 const deviceId = `android-${(Math.random() * 1e24).toString(36)}`
 const tokenPath = path.resolve(import.meta.dir, '..', 'data/token.json')
-const delay = () => new Promise((resolve) => setTimeout(resolve, 10_000))
+const delay = () => new Promise((resolve) => setTimeout(resolve, Math.random() * 10_000 + 10_000))
 
 if (await fs.exists(tokenPath)) {
   token = await Bun.file(tokenPath).json()
@@ -47,8 +47,8 @@ async function publish(first: boolean = true) {
       logger.success(`Retrieved a random ayah: ${qs}`)
 
       if (text.length > 500) {
-        publish(true)
         await task.fail(`Generated text exceeds 500 characters`)
+        return
       }
 
       spinner = logger.await(`Currently posting a random ayah`)
@@ -70,6 +70,7 @@ async function publish(first: boolean = true) {
 
       if (text.length > 500 || !current.ayah.footnotes) {
         await task.complete('No footnotes available')
+        return
       }
 
       spinner = logger.await(`Currently posting a footnotes`)
