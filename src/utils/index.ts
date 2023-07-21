@@ -18,7 +18,7 @@ export const delay = (ms: number | null = null) => {
 }
 
 export const generateDeviceId = () => {
-  const bytesLength = Math.floor(13 / 2)
+  const bytesLength = Math.ceil(13 / 2)
   const bytesBuffer = crypto.randomBytes(bytesLength)
   const random = bytesBuffer.toString('hex').slice(0, 13)
 

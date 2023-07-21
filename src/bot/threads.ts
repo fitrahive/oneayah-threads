@@ -7,23 +7,25 @@ import * as Threads from '../../modules/threads-api/threads-api/src'
 import type { Spinner } from '@poppinss/cliui/build/src/Logger/Spinner'
 
 let token: string = ''
+let deviceID: string = ''
 
-const deviceID = generateDeviceId()
-const tokenPath = resolve('token.json')
+const sessionPath = resolve('session.json')
 
-if (await fs.exists(tokenPath)) {
-  token = await Bun.file(tokenPath).json()
+if (await fs.exists(sessionPath)) {
+  ;({ token, deviceID } = await Bun.file(sessionPath).json())
 }
 
 const threads = new Threads.ThreadsAPI({
-  deviceID,
+  deviceID: deviceID || generateDeviceId(),
   token: Bun.env.THREADS_TOKEN || token || undefined,
   username: Bun.env.THREADS_USERNAME,
   password: Bun.env.THREADS_PASSWORD,
 })
 
 token = (await threads.getToken()) || ''
-await Bun.write(tokenPath, JSON.stringify(token))
+deviceID = threads.deviceID
+
+await Bun.write(sessionPath, JSON.stringify({ token, deviceID }, undefined, 2))
 
 export const publishToThreads = async () => {
   let spinner: Spinner
