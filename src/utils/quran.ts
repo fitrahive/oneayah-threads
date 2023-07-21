@@ -24,7 +24,7 @@ export const getRandomAyah = async (): Promise<RandomType> => {
     published = ['1-1']
   }
 
-  if (!Boolean(Bun.env.BISMILLAH) || published.length > 0) {
+  if (!Boolean(Bun.env.START_WITH_BISMILLAH) || published.length > 0) {
     do {
       randomSurah = getRandomNumber(1, quran.length)
       randomAyah = getRandomNumber(1, quran[randomSurah - 1].ayah)

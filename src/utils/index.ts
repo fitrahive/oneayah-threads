@@ -6,7 +6,7 @@ export const getRandomNumber = (min: number, max: number) => {
 }
 
 export const resolve = (...fileName: string[]) => {
-  return path.resolve(import.meta.dir, '..', 'data', ...fileName)
+  return path.resolve(import.meta.dir, '..', '..', 'data', ...fileName)
 }
 
 export const randomRange = (min: number, max: number) => {
