@@ -1,44 +1,44 @@
-import * as path from 'path'
 import * as fs from 'fs/promises'
 import { tasks } from '@poppinss/cliui'
-import { type RandomType, random } from './quran'
-import * as Threads from '../modules/threads-api/threads-api/src'
+import { RandomType } from '../types/quran'
+import { getRandomAyah } from '../utils/quran'
+import { delay, generateDeviceId, resolve } from '../utils'
+import * as Threads from '../../modules/threads-api/threads-api/src'
 import type { Spinner } from '@poppinss/cliui/build/src/Logger/Spinner'
 
 let token: string = ''
 
-const deviceId = `android-${(Math.random() * 1e24).toString(36)}`
-const tokenPath = path.resolve(import.meta.dir, '..', 'data/token.json')
-const delay = () => new Promise((resolve) => setTimeout(resolve, Math.random() * 10_000 + 10_000))
+const deviceID = generateDeviceId()
+const tokenPath = resolve('token.json')
 
 if (await fs.exists(tokenPath)) {
   token = await Bun.file(tokenPath).json()
 }
 
 const threads = new Threads.ThreadsAPI({
-  deviceID: deviceId,
-  token: token || undefined,
+  deviceID,
+  token: Bun.env.THREADS_TOKEN || token || undefined,
   username: Bun.env.THREADS_USERNAME,
   password: Bun.env.THREADS_PASSWORD,
 })
-token = (await threads.getToken()) || ''
 
+token = (await threads.getToken()) || ''
 await Bun.write(tokenPath, JSON.stringify(token))
 
-async function publish(first: boolean = true) {
+export const publishToThreads = async () => {
   let spinner: Spinner
   let current: RandomType
-  let parentId: string | undefined
-  let threadsId: string | undefined
-  let childrenId: string | undefined
+  let parentPostID: string | undefined
+  let threadsID: string | undefined
+  let childrenPostID: string | undefined
 
   await tasks()
-    .add(first ? 'Initiating several tasks' : 'Getting random ayah again', async (_, task) => {
+    .add('Initiating several tasks', async (_, task) => {
       await task.complete()
     })
     .add('Posting a random ayah', async (logger, task) => {
       spinner = logger.await('Retrieving a random ayah')
-      current = await random()
+      current = await getRandomAyah()
 
       const qs = `QS. ${current.surah.transliteration}: ${current.ayah.ayah}`
       const text = `${current.ayah.arabic}\n\n${current.ayah.translation} (${qs})`
@@ -47,14 +47,14 @@ async function publish(first: boolean = true) {
       logger.success(`Retrieved a random ayah: ${qs}`)
 
       if (text.length > 500) {
-        await task.fail(`Generated text exceeds 500 characters`)
+        await task.fail('Generated text exceeds 500 characters')
         return
       }
 
-      spinner = logger.await(`Currently posting a random ayah`)
+      spinner = logger.await('Currently posting a random ayah')
 
       try {
-        threadsId = parentId = await threads.publish({ text })
+        threadsID = parentPostID = await threads.publish({ text })
       } catch (error: any) {
         spinner.stop()
         await task.fail(error.message)
@@ -73,11 +73,11 @@ async function publish(first: boolean = true) {
         return
       }
 
-      spinner = logger.await(`Currently posting a footnotes`)
+      spinner = logger.await('Currently posting a footnotes')
 
       try {
         await delay()
-        childrenId = await threads.publish({ text, parentPostID: parentId!.split('_')[0] })
+        childrenPostID = await threads.publish({ text, parentPostID })
       } catch (error: any) {
         spinner.stop()
         await task.fail(error.message)
@@ -85,8 +85,8 @@ async function publish(first: boolean = true) {
 
       spinner.stop()
       logger.success('Successfully posted footnotes')
-      parentId = childrenId || parentId
 
+      parentPostID = childrenPostID || parentPostID
       await task.complete()
     })
     .add('Posting a brief tafsir', async (logger, task) => {
@@ -106,18 +106,19 @@ async function publish(first: boolean = true) {
 
           try {
             await delay()
-            childrenId = await threads.publish({
+            childrenPostID = await threads.publish({
               text: `${tafsir.title}\n\n${tafsir.description}`,
-              parentPostID: parentId!.split('_')[0],
+              parentPostID,
             })
           } catch (error: any) {
             spinner.stop()
             logger.error(error.message)
+
             continue
           }
 
           spinner.stop()
-          parentId = childrenId || parentId
+          parentPostID = childrenPostID || parentPostID
         }
       }
 
@@ -129,5 +130,3 @@ async function publish(first: boolean = true) {
     })
     .run()
 }
-
-publish()

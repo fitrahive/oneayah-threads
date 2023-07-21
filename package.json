@@ -6,7 +6,8 @@
   "module": "src/threads.ts",
   "scripts": {
     "prepare": "husky install",
-    "start": "bun src/threads.ts",
+    "start:cli": "bun src/cli.ts",
+    "start:http": "bun src/http/index.ts",
     "collect:surah": "cp -r modules/quran-kemenag/data/* data/surah",
     "collect:tafsir": "cp -r modules/tafsir/data/* data/tafsir",
     "format": "prettier --write .",
@@ -46,6 +47,7 @@
   "dependencies": {
     "@poppinss/cliui": "^3.0.5",
     "axios": "^1.4.0",
+    "baojs": "^0.2.1",
     "dotenv": "^16.3.1",
     "mrmime": "^1.0.1",
     "uuid": "^9.0.0"
